@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme{
+  --color-primary: #3b82f6;/* Tailwind's blue-500 */
+  --color-primary-hover: #2563EB;/* Tailwind's blue-600 */
+  --color-bg:  #e5e7eb;/* Tailwind's green-500 */
+  
+}
+
+/* For Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+label :has(+ input) {
+  @apply flex flex-col justify-start items-center gap-2 cursor-pointer;
+}
+
+label input{
+  @apply w-full outline-0 border-2 border-gray-400 rounded-md p-1 px-2 mt-2 mb-2
+}
