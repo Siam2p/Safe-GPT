@@ -17,4 +17,5 @@ node -v
 npm -v
 npm install --global yarn
 yarn -v
+cd Safe-GPT
 yarn vite
