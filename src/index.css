@@ -6,6 +6,21 @@
   --color-bg:  #e5e7eb;/* Tailwind's green-500 */
   
 }
+/* Chrome, Safari, Edge */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* IE/Old Edge */
+html {
+  -ms-overflow-style: none;
+}
+
 
 /* For Chrome, Safari, Edge */
 input[type="number"]::-webkit-inner-spin-button,
@@ -24,6 +39,6 @@ label :has(+ input) {
   @apply flex flex-col justify-start items-center gap-2 cursor-pointer;
 }
 
-label input{
-  @apply w-full outline-0 border-2 border-gray-400 rounded-md p-1 px-2 mt-2 mb-2
+label input:not([id="password"]) {
+  @apply w-full outline-0 border-2 border-gray-400 rounded-md p-1 px-2 mt-2 mb-2;
 }

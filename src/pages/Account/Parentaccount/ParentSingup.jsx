@@ -3,6 +3,9 @@ import SingUp from "../../Singup";
 import { FiUserCheck } from "react-icons/fi";
 import { LuShield } from "react-icons/lu";
 import { CiWarning } from "react-icons/ci";
+import PasswordInput from "../../../components/PasswordInput";
+import EmailNumber from "../../../components/EmailNumber";
+import { Link } from "react-router-dom";
 
 function ParentSingup() {
   const [secureCode, setSecureCode] = useState(null);
@@ -11,9 +14,14 @@ function ParentSingup() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(secureCode);
-    const allData = { ...data, secureCode: handleGenerate() };
-    console.log(allData);
+    const allData = {
+      ...data,
+      ...(data.email ? { number: "" } : { email: "" }),
+    };
+
+    const singupData = { ...allData, secureCode: handleGenerate() };
+    console.log(singupData);
+    // window.alert(...allData)
   }
 
   const handleGenerate = () => {
@@ -24,13 +32,10 @@ function ParentSingup() {
     return otp;
   };
 
-  // handleGenerate();
-  // console.log(secureCode);
-
   return (
     <section className="flex flex-col items-center pb-10 bg-bg">
       <SingUp type={"parent"} />
-      <div className="flex flex-col items-center w-125">
+      <div className="flex flex-col items-center m-5 max-w-100 sm:max-w-125">
         {secureCode === null ? (
           <div className="">
             <div className="bg-white w-20 h-20 rounded-full shadow-lg flex items-center justify-center mt-5 mx-auto">
@@ -55,7 +60,10 @@ function ParentSingup() {
                   পারি
                 </p>
               </div>
-              <form onSubmit={singup} className="flex flex-col space-y-4">
+              <form
+                onSubmit={singup}
+                className="flex flex-col space-y-4 pb-5 border-b border-gray-500"
+              >
                 <label htmlFor="name">
                   পূর্ণ নাম*
                   <input
@@ -74,8 +82,8 @@ function ParentSingup() {
                     name="nid"
                     placeholder="১০ বা ১৭ ডিজিটের NID নম্বর"
                     required
-                    minlength="10"
-                    maxlength="17"
+                    minLength="10"
+                    maxLength="17"
                     pattern="\d{10,17}"
                     onInvalid={(e) =>
                       e.target.setCustomValidity(
@@ -94,41 +102,43 @@ function ParentSingup() {
                     name="age"
                     placeholder="আপনার বয়স"
                     min={30}
+                    max={120}
                     required
                     onInvalid={(e) =>
                       e.target.setCustomValidity(
-                        "বয়স অবশ্যই ৩০ বা তার বেশি হতে হবে"
+                        "বয়স অবশ্যই ৩০ থেকে 1২০ বছরের মধ্যে হতে হবে"
                       )
                     }
                     onInput={(e) => e.target.setCustomValidity("")}
                     className="border p-2 rounded"
                   />
                 </label>
-                <label htmlFor="phone">
-                  ফোন নম্বর*
-                  <input
-                    type="text"
-                    id="phone"
-                    name="phone"
-                    placeholder="01XXXXXXXXX"
-                    pattern="^01[3-9][0-9]{8}$"
-                    required
-                    onInvalid={(e) =>
-                      e.target.setCustomValidity(
-                        "সঠিক বাংলাদেশি ফোন নম্বর লিখুন (১১ সংখ্যার, 01 দিয়ে শুরু)"
-                      )
-                    }
-                    onInput={(e) => e.target.setCustomValidity("")}
-                    className="border p-2 rounded"
-                  />
+
+                {/* phone */}
+                <EmailNumber />
+
+                <label htmlFor="password">
+                  পাসওয়ার্ড*
+                {/* password  */}
+                <PasswordInput />
                 </label>
+
                 <button
                   type="submit"
-                  className="w-full text-white rounded-md bg-primary hover:bg-primary-hover py-1.5"
+                  className="w-full text-white rounded-md bg-primary hover:bg-primary-hover py-1.5 cursor-pointer"
                 >
                   প্রোফাইল তৈরি করুন
                 </button>
               </form>
+
+              <div className="flex justify-center space-x-2 mt-3">
+                <Link
+                  to="/parent/login"
+                  className="text-primary-hover cursor-pointer underline"
+                >
+                  লগইন
+                </Link>
+              </div>
             </div>
 
             <div className="bg-blue-200 w-full shadow-lg text-white p-4 rounded-lg mt-5">
@@ -165,6 +175,14 @@ function ParentSingup() {
                 এই কোডটি শিশু যোগ করার সময় প্রয়োজন হবে।
               </p>
             </div>
+            <div className="flex justify-center space-x-2 mt-3">
+                <Link
+                  to="/parent/login"
+                  className="text-primary-hover cursor-pointer underline"
+                >
+                  লগইন
+                </Link>
+              </div>
           </div>
         )}
       </div>

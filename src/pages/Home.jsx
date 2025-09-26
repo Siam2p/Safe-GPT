@@ -8,7 +8,7 @@ function Home() {
             <p className="text-lg text-center mb-8">
                 একটি শিশু-বান্ধব AI পরিবেশ, যেখানে রয়েছে পিতামাতার নিয়ন্ত্রণ এবং মনিটরিং ফিচার।
             </p>
-            <Link to="/SingUp" className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover transition">
+            <Link to="/parent" className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover transition">
                 অ্যাকাউন্টে যান
             </Link>
         </div>
